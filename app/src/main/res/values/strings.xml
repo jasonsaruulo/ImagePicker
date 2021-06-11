@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ImagePicker</string>
+
+    <!--  Main  -->
+    <string name="main_open_image_picker">Open image picker</string>
+
+    <!--  Picker  -->
+    <string name="picker_title">PickerActivity</string>
 </resources>

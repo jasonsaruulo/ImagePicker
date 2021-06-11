@@ -2,6 +2,7 @@ package com.shafiq.saruul.imagepicker.di
 
 import android.content.Context
 import com.shafiq.saruul.imagepicker.ui.main.di.MainComponent
+import com.shafiq.saruul.imagepicker.ui.picker.di.PickerComponent
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
@@ -24,7 +25,8 @@ interface ImagePickerComponent : AndroidInjector<ImagePickerApplication> {
     }
 
     fun mainComponent(): MainComponent.Factory
+    fun pickerComponent(): PickerComponent.Factory
 }
 
-@Module(subcomponents = [MainComponent::class])
+@Module(subcomponents = [MainComponent::class, PickerComponent::class])
 object SubcomponentsModule
