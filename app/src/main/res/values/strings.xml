@@ -5,5 +5,6 @@
     <string name="main_open_image_picker">Open image picker</string>
 
     <!--  Picker  -->
-    <string name="picker_title">PickerActivity</string>
+    <string name="picker_title">Select image(s)</string>
+    <string name="picker_permission_needed">Please allow access to your photos.</string>
 </resources>
