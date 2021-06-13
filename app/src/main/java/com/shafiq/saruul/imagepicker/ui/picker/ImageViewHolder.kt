@@ -7,4 +7,5 @@ import com.shafiq.saruul.imagepicker.R
 
 class ImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val image: ImageView = view.findViewById(R.id.image_cell_image)
+    val selectedOverlay: View = view.findViewById(R.id.image_cell_selected_overlay)
 }

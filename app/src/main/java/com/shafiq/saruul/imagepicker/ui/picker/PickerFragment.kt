@@ -102,7 +102,10 @@ class PickerFragment @Inject constructor() : Fragment() {
         })
         viewModel.showImages.observe(viewLifecycleOwner, {
             view?.findViewById<RecyclerView>(R.id.picker_images)?.adapter =
-                ImageAdapter(it, viewModel.imageHandler)
+                ImageAdapter(it, viewModel.imageHandler, viewModel)
+        })
+        viewModel.refreshCell.observe(viewLifecycleOwner, {
+            view?.findViewById<RecyclerView>(R.id.picker_images)?.adapter?.notifyItemChanged(it)
         })
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             // TODO: Handle file access for api >= 30 (https://developer.android.com/training/data-storage/manage-all-files)
