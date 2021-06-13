@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId "com.shafiq.saruul.imagepicker"
         minSdk 16
-        targetSdk 30
+        targetSdk 29
         versionCode 1
         versionName "1.0"
 
