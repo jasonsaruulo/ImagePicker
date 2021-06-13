@@ -7,9 +7,10 @@ import androidx.lifecycle.ViewModel
 import com.shafiq.saruul.imagepicker.SingleLiveEvent
 import javax.inject.Inject
 
-class PickerViewModel @Inject constructor() : ViewModel() {
+class PickerViewModel @Inject constructor(val imageHandler: ImageHandler) : ViewModel() {
+
     enum class State {
-        Content,
+        Images,
         ReadExternalStoragePermissionNeeded
     }
 
@@ -17,6 +18,8 @@ class PickerViewModel @Inject constructor() : ViewModel() {
     val state: LiveData<State> = _state
     private val _loadImageUris = SingleLiveEvent<Void?>()
     val loadImageUris: LiveData<Void?> = _loadImageUris
+    private val _showImages = MutableLiveData<List<Uri>>()
+    val showImages: LiveData<List<Uri>> = _showImages
 
     fun onReadExternalStoragePermissionGranted(granted: Boolean) {
         if (granted) {
@@ -27,6 +30,7 @@ class PickerViewModel @Inject constructor() : ViewModel() {
     }
 
     fun onImageUrisLoaded(imageUris: List<Uri>) {
-        // TODO: Show images
+        _showImages.value = imageUris
+        _state.value = State.Images
     }
 }

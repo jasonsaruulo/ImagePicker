@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.shafiq.saruul.imagepicker.R
 import com.shafiq.saruul.imagepicker.di.ImagePickerApplication
 import com.shafiq.saruul.imagepicker.di.ImagePickerViewModelFactory
@@ -48,8 +49,8 @@ class PickerFragment @Inject constructor() : Fragment() {
     ): View? {
         viewModel.state.observe(viewLifecycleOwner, {
             when (it) {
-                PickerViewModel.State.Content -> {
-                    // TODO: Show images
+                PickerViewModel.State.Images -> {
+                    showImages()
                 }
                 PickerViewModel.State.ReadExternalStoragePermissionNeeded -> {
                     showReadExternalStoragePermissionNeeded()
@@ -99,6 +100,10 @@ class PickerFragment @Inject constructor() : Fragment() {
                 viewModel.onImageUrisLoaded(imageUris)
             }
         })
+        viewModel.showImages.observe(viewLifecycleOwner, {
+            view?.findViewById<RecyclerView>(R.id.picker_images)?.adapter =
+                ImageAdapter(it, viewModel.imageHandler)
+        })
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             // TODO: Handle file access for api >= 30 (https://developer.android.com/training/data-storage/manage-all-files)
         } else {
@@ -117,7 +122,13 @@ class PickerFragment @Inject constructor() : Fragment() {
         return inflater.inflate(R.layout.picker_fragment, container, false)
     }
 
+    private fun showImages() {
+        view?.findViewById<View>(R.id.picker_images)?.visibility = View.VISIBLE
+        view?.findViewById<View>(R.id.picker_permission_needed)?.visibility = View.GONE
+    }
+
     private fun showReadExternalStoragePermissionNeeded() {
+        view?.findViewById<View>(R.id.picker_images)?.visibility = View.GONE
         view?.findViewById<View>(R.id.picker_permission_needed)?.visibility = View.VISIBLE
     }
 }

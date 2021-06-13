@@ -11,7 +11,7 @@ class PickerActivity : AppCompatActivity() {
         setContentView(R.layout.picker_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, PickerFragment.newInstance())
+                .replace(R.id.picker_container, PickerFragment.newInstance())
                 .commitNow()
         }
     }
